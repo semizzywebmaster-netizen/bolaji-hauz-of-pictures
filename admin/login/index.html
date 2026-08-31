@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BHP Admin Login</title>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:system-ui;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}
+.card{background:#1a1a1a;border:1px solid #c9a86a;border-radius:16px;padding:32px;max-width:360px;width:90%}
+input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #333;background:#0a0a0a;color:#fff;box-sizing:border-box}
+button{width:100%;padding:14px;background:#c9a86a;color:#000;font-weight:700;border:none;border-radius:8px;cursor:pointer;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="card">
+<h2 style="color:#c9a86a;margin:0 0 16px">BHP Admin</h2>
+<input id="u" placeholder="Username (bolaji_admin)">
+<input id="p" type="password" placeholder="Password (BHPadmin2026!)">
+<button onclick="login()">Login to Dashboard</button>
+<p id="msg" style="color:#f55;font-size:12px;margin-top:12px"></p>
+<p style="color:#666;font-size:11px;margin-top:16px">After login redirects to main site admin. Credentials: bolaji_admin / BHPadmin2026!</p>
+</div>
+<script>
+function login(){
+  const u=document.getElementById('u').value.trim();
+  const p=document.getElementById('p').value;
+  if(u==='bolaji_admin' && p==='BHPadmin2026!'){
+    localStorage.setItem('bhp_admin_token', JSON.stringify({user:u, exp: Date.now()+86400000}));
+    localStorage.setItem('bhp_admin_auth', 'true');
+    window.location.href='/index.html#admin';
+  }else{
+    document.getElementById('msg').textContent='Invalid: Use bolaji_admin / BHPadmin2026!';
+  }
+}
+</script>
+</body>
+</html>
